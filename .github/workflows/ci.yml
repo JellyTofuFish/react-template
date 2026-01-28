@@ -1,0 +1,39 @@
+name: CI - Tests
+
+on:
+  push:
+    branches: [main, develop]
+  pull_request:
+    branches: [main, develop]
+
+jobs:
+  test-suite:
+    runs-on: ubuntu-latest
+    container:
+      image: mcr.microsoft.com/playwright:v1.45.2-jammy
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Validate lint
+        run: npm run lint
+
+      - name: Validate format
+        run: npm run format
+
+      - name: Run Jest unit tests
+        run: npm run unit
+
+      # - name: Build app for e2e tests
+      #   run: npm run build
+
+      # - name: Run Playwright e2e tests
+      #   run: npm run e2e
