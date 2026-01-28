@@ -32,7 +32,14 @@ const baseLanguageOptions = (project) => ({
 });
 
 export default tseslint.config([
-  globalIgnores(['dist', 'node_modules', 'package.json', 'package-lock.json', 'test-results']),
+  globalIgnores([
+    'dist',
+    'node_modules',
+    'package.json',
+    'package-lock.json',
+    'test-results',
+    '.prettierrc.json',
+  ]),
 
   {
     files: ['**/*.{js,cjs,mjs,ts,tsx,jsx}'],
